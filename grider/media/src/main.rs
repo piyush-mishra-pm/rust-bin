@@ -1,71 +1,7 @@
-#[derive(Debug)]
-enum Media {
-    Book{ title: String, author: String},
-    Movie { title: String, director:String},
-    Audiobook {title: String},
-    Podcast (u32),
-    Placeholder
-}
+mod content;
 
-impl Media {
-    fn description(&self) -> String {
-        // VERBOSE SELF TYPE CHECK
-        // if let Media::Book{title, author} = self {
-        //     format!("Book: {} {}", title, author)
-        // }else if let Media::Movie{title, director} = self  {
-        //     format!("Movie: {} {}", title, director)
-        // }else if let Media::Audiobook { title } = self  {
-        //     format!("Audiobook: {}", title)
-        // }else{
-        //     format!("Unknown media!")
-        // }
-
-        // PATTERN MATCHING:
-        match self {
-            Media::Book { title, author } => {
-                format!("Book: {} {}", title, author)
-            },
-            Media::Movie { title, director } => {
-                format!("Movie: {} {}", title, director)
-            },
-            Media::Audiobook { title } => {
-                format!("Audiobook: {}", title)
-            },
-            Media::Podcast(episode_number) => {
-                format!("Podcast: {}", episode_number)
-            },
-            Media::Placeholder => {
-                format!("Placeholder:")
-            }
-        }
-    }
-}
-
-#[derive(Debug)]
-struct Catalog {
-    items: Vec<Media>
-}
-impl Catalog {
-    fn new() -> Self {
-        Catalog {items: vec![]}
-    }
-
-    fn add(&mut self, media: Media) {
-        self.items.push(media);
-    }
-
-    fn get_by_index(&self, idx: usize) -> Option<&Media> {
-        if self.items.len() > idx {
-            Some(&self.items[idx])
-        }else{
-            None
-        }
-    }
-}
-
-fn print_media(media: Media){
-    println!("{:#?}", media);
-}
+use content::media::Media;
+use content::catalog::Catalog;
 
 fn main() {
     let audiobook = Media::Audiobook { 
@@ -96,16 +32,6 @@ fn main() {
     catalog.add(placeholder);
     println!("{:#?}", catalog);
 
-    // Option (Some, None):
-    match catalog.items.get(0) {
-        Some(val) =>{
-            println!("Item: {:#?}",  val);
-        },
-        None=>{
-            println!("‼ None");
-        }
-    }
-
     println!("{:#?}",catalog.get_by_index(105));
     println!("{:#?}",catalog.get_by_index(3));
 
@@ -126,6 +52,4 @@ fn main() {
             println!("‼ None");
         }
     }
-
-    println!("{:#?}", catalog.items.get(3).unwrap());
 }
