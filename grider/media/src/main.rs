@@ -54,19 +54,13 @@ impl Catalog {
         self.items.push(media);
     }
 
-    fn get_by_index(&self, idx: usize) -> MightHaveAValue {
+    fn get_by_index(&self, idx: usize) -> Option<&Media> {
         if self.items.len() > idx {
-            MightHaveAValue::ThereIsAValue(&self.items[idx])
+            Some(&self.items[idx])
         }else{
-            MightHaveAValue::NoValAvlbl
+            None
         }
     }
-}
-
-#[derive(Debug)]
-enum MightHaveAValue<'a>{
-    ThereIsAValue(&'a Media),
-    NoValAvlbl,
 }
 
 fn print_media(media: Media){
@@ -116,20 +110,22 @@ fn main() {
     println!("{:#?}",catalog.get_by_index(3));
 
     match catalog.get_by_index(0) {
-        MightHaveAValue::ThereIsAValue(v) => {
+        Option::Some(v) => {
             println!("Item: {:#?}", v);
         },
-        MightHaveAValue::NoValAvlbl => {
+        Option::None => {
             println!("‼ None");
         }
     }
 
     match catalog.get_by_index(100) {
-        MightHaveAValue::ThereIsAValue(v) => {
+        Option::Some(v) => {
             println!("Item: {:#?}", v);
         },
-        MightHaveAValue::NoValAvlbl => {
+        Option::None => {
             println!("‼ None");
         }
     }
+
+    println!("{:#?}", catalog.items.get(3).unwrap());
 }
