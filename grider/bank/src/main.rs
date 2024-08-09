@@ -22,16 +22,22 @@ impl Bank {
     }
 }
 
-fn print_account(account: Account) -> Account {
+fn print_account(account: &mut Account) {
+    println!("Adding balance to account:");
+    account.balance+=10;
     println!("{:#?}", account);
-    account
+}
+
+fn add_account_to_bank(bank: &mut Bank, account: Account){
+    println!("Adding account to bank:");
+    bank.accounts.push(account);
 }
 
 fn main() {
-    let bank = Bank::new();
+    let mut bank = Bank::new();
     let mut account = Account::new(1, String::from("Piyush"));
 
+    print_account(&mut account);
+    add_account_to_bank(&mut bank, account);
     println!("{:#?}", bank);
-    account = print_account(account);
-    account = print_account(account);
 }
