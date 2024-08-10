@@ -1,9 +1,6 @@
 use std::{fs, io::Error};
 
 fn main() {
-    // let text = fs::read_to_string("logs.txt");
-    // println!("{:#?}", text);
-
     match divide(5.0, 0.0) {
         Ok(res) => {
             println!("✅ Div result: {:#?}", res);
@@ -21,6 +18,15 @@ fn main() {
         Ok(..)=> println!("✅ Email valid"),
         Err(err)=>println!("❌ Error: {:#?}", err)
     }
+
+    match fs::read_to_string("logs.txt")  {
+        Ok(parsed_text) => {
+            println!("✅ Parsed successfully. Length {} chars.", parsed_text.len())
+        },
+        Err(why_failed) => {
+            println!("❌ Failed to read: {}", why_failed)
+        }
+    } ;
 }
 
 fn divide(a:f64, b: f64) -> Result<f64, Error> {
