@@ -1,6 +1,13 @@
 use std::{fs, io::Error};
 
+fn string_test(a:String, b:&String, c:&str){
+
+}
+
 fn main() {
+    string_test("Red".to_string(), &String::from("Red"), String::from("Red").as_str());
+    string_test("Red".to_string(), &String::from("Red"), &String::from("Red"));
+
     match divide(5.0, 0.0) {
         Ok(res) => {
             println!("✅ Div result: {:#?}", res);
