@@ -13,7 +13,7 @@ fn extract_errors(text: &str) -> Vec<&str> {
 }
 
 fn main() -> Result<(), Error> {
-    // validation_and_strings_test_code();
+    validation_and_strings_test_code();
 
     // Method 1: When can meanigfully deal with error.
     // match fs::read_to_string("logs.txt")  {
