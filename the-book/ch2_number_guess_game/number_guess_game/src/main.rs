@@ -2,8 +2,7 @@ use rand::Rng;
 
 static LOWER_RANGE: u32 = 1;
 static HIGHER_RANGE: u32 = 10;
-// todo:
-// 1. store record of past games. and the numbers.
+
 #[derive(Debug)]
 struct Game{
     number: u32,
